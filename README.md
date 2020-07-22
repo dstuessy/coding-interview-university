@@ -1,6 +1,8 @@
-# Coding Interview University
+# Coding Revision
 
 Checklist for progress tracking was moved to a [different file](./CHECKLIST.md)
+
+This repo was initially forked from another project.
 
 ---
 
