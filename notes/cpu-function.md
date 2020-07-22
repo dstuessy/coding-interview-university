@@ -1,4 +1,4 @@
-# How a CPU works
+# How a CPU executes an operation
 
 `INC A` is the assembly instruction to increment register `A`. This
 is be represented in binary as `00111100`, which is easier to read 
