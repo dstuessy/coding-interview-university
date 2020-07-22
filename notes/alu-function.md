@@ -28,7 +28,7 @@ B --|----|___/
 
 This is called a _Half Adder_.
 
-To make a full adder it takes two half adders. This takes three
+To make a _Full Adder_ it takes two half adders. This takes three
 numbers as input, though. The `OR` gate is used to check if either one
 of the carry bits is true:  
 
