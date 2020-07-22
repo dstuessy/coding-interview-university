@@ -51,24 +51,15 @@ This allows to chain adders for larger computations.
 
 Here's a table of all possible sums for overview:
 
-|---|---|---|-------|-----|
 | A | B | C | Carry | Sum |
 |---|---|---|-------|-----|
 | 0 | 0 | 0 |   0   |  0  |
-|---|---|---|-------|-----|
 | 0 | 0 | 1 |   0   |  1  |
-|---|---|---|-------|-----|
 | 0 | 1 | 0 |   0   |  1  |
-|---|---|---|-------|-----|
 | 1 | 0 | 0 |   0   |  1  |
-|---|---|---|-------|-----|
 | 0 | 1 | 1 |   1   |  0  |
-|---|---|---|-------|-----|
 | 1 | 1 | 0 |   1   |  0  |
-|---|---|---|-------|-----|
 | 1 | 1 | 1 |   1   |  1  |
-|---|---|---|-------|-----|
-
 
 As mentioned, adders can be chained to compute larger numbers. 
 Here's an example for 8 bits called an '8-bit ripple carry adder'.
