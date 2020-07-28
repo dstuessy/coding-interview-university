@@ -121,5 +121,123 @@ required to enable all of its gated latches. Then `DATA INPUT` wires
 for the gated latches are used individually to write a bit of data
 into each.
 
-NOTE: where I left off on the video https://youtu.be/fpnE6UAfbtU?t=335
+For small registers, these latches can be arranged in series. However,
+modern 64-bit registers would need 64 wires for `DATA INPUT` and
+64 wires for `OUTPUT`, only one wire for `WRITE ENABLE`, making a
+total of 129 wires. And then for 256-bits, 513 wires.
+This adds up a lot.
+
+To reduce the number of wires used, a matrix can be used. In this
+configuration, latches are arranged in a grid, with 16x16 latches 
+for a 256-bit register. Columns and rows of wires are then used to
+to activate the latches. Basically as an _(x, y)_ coordinate system.
+
+Here's how a latch looks in within a matrix.
+
+```
+   |
+   |
+---Ç--------|--------------------------------------------------------
+   |        |                                                                                            
+   |        |   DATA IN/OUT ----------|------------------|                                                  
+   |        |                         |___|GATED|        |
+   |        |                             |LATCH|----|T|_|
+   |        |   WRITE ENABLE ---|AND|_____|_____|    |_|
+   |        |           ________|___|                 |
+   |        --|AND|____/                              |
+   |----------|___|    \________________|AND|_________|
+   |     READ ENABLE -------------------|___|
+```
+
+In this configuration, only two wires are needed for `DATA INPUT`,
+`OUTPUT` and `WRITE ENABLE`. One for both `DATA IN/OUT`, another for
+`WRITE ENABLE`. The latter will only activate if both the wires for
+the column and the row are active. This is due to the first `AND` to
+the left of the diagram, connected to both the column and row wires.
+This `AND` leads to two other `AND`s for `WRITE ENABLE` and
+`READ ENABLE`. These won't turn `1` unless both the coordinate wires
+are active and `WRITE ENABLE` or `READ ENABLE` are `1`. These then 
+lead to their respective inputs or outputs of the `GATED LATCH`,
+either reading or writing data.
+
+To address a latch, an address is used... Go figure... These are
+fed to a multiplexer as binary numbers such as 1000 for 8 or 1100
+for 12. The multiplexer will then activate the corresponding columns
+and rows.
+
+```
+MULTIPLEXERS (one per address/coordinate)
+
+COLUMN ADDRESS (4-bit)
+ |
+ `--0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16
+0 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+1 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+2 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+3 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+4 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+5 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+6 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+7 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+8 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+9 __|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+10 _|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+11 _|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+12 _|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+13 _|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+14 _|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+15 _|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|  
+ | 
+ROW ADDRESS (4-bit)
+
+```
+
+## Memory
+
+A matrix of latches can be abstracted to 256-bit memory with an 8-bit
+address, `WRITE ENABLE` and `READ ENABLE` wires, and finally one
+`DATA` wire for input or output.
+
+```
+           ______________________
+        ===|                    |
+8-bit   ===|                    |
+ADDRESS ===|                    |
+        ===|       256-BIT      |
+           |       MEMORY       |
+DATA    ---|                    |
+WRITE      |                    |
+ENABLE  ---|                    |
+READ       |                    |
+ENABLE  ---|____________________|
+```
+
+To store more useful amounts of memory, we can arrange them in a row
+of eight.
+
+```  
+            |M| |M| |M| |M| |M| |M| |M| |M|
+        ======----   |   |   |   |   |   |
+8-bit   ==============----   |   |   |   |
+ADDRESS ======================----   |   |
+        ==============================----
+             ||| ||| ||| ||| ||| ||| ||| |||
+WRITE        ||| ||| ||| ||| ||| ||| ||| |||
+ENABLE -----------------------------------||
+              ||  ||  ||  ||  ||  ||  ||  ||
+READ          ||  ||  ||  ||  ||  ||  ||  ||
+ENABLE ------------------------------------|
+               |   |   |   |   |   |   |   |
+               -----------------------------
+                             |
+                        8-bit DATA
+
+NOTE: due to ASCII limitations, it may look like WRITE ENABLE,
+READ ENABLE, and 8-bit DATA are joined. These are not. They overlap
+each other.
+```
+
+Storing 8-bits of data (a byte), each 
+
+NOTE: video left off here https://youtu.be/fpnE6UAfbtU?t=538
 
