@@ -237,7 +237,17 @@ READ ENABLE, and 8-bit DATA are joined. These are not. They overlap
 each other.
 ```
 
-Storing 8-bits of data (a byte), each 
+Storing 8-bits of data (a byte), sends one bit to each memory unit
+at the same address with the signal to `WRITE ENABLE`. Reading works
+the same but with `READ ENABLE`.
 
-NOTE: video left off here https://youtu.be/fpnE6UAfbtU?t=538
+Such a series of memory units with shared addresses can be referred
+to as Random-Access Memory (RAM). It's called this because memory
+can be accessed at any time in any order from any address. The
+specific example here, though, is called Static Random-Access Memory
+(SRAM), which is built out of latches. There are other types such as
+DRAM, Flash Memory, and NVRAM. They are all similar in function to
+SRAM, but use different components to store individual bits, such as
+different logic gates, capacitors, charge traps, or memristors. 
+They all store bits of memory in matrices of memory cells, though.
 

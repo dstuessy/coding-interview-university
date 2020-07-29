@@ -14,7 +14,7 @@ Progress is tracked here.
 - [ ] **How computers process a program:**
     - [x] [How CPU executes a program (video)](https://www.youtube.com/watch?v=XM4lGflQFvA) -- [Notes](notes/cpu-function.md)
     - [x] [How computers calculate - ALU (video)](https://youtu.be/1I5ZMmrOfnA) -- [Notes](notes/alu-function.md)
-    - [ ] [Registers and RAM (video)](https://youtu.be/fpnE6UAfbtU)
+    - [x] [Registers and RAM (video)](https://youtu.be/fpnE6UAfbtU)
     - [ ] [The Central Processing Unit (CPU) (video)](https://youtu.be/FZGugFqdr60)
     - [ ] [Instructions and Programs (video)](https://youtu.be/zltgXvg6r3k)
 
