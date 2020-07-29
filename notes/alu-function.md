@@ -33,9 +33,11 @@ numbers as input, though. The `OR` gate is used to check if either one
 of the carry bits is true:  
 
 ```
-A ---|HALF ADDER|C-------------------|OR\_____ 1st digit of result
+A ---|HALF ADDER|C-------------------|OR\_____ 2nd digit of result
 B ---|__________|S----|HALF ADDER|C--|__/
-C --------------------|__________|S----------- 2nd digit of result
+C --------------------|__________|S----------- 1st digit of result
+
+NOTE: digits are read from the right e.g. for 10, 1 is the second
 ```
 
 e.g. for `1+1`, the outcome would be `10`, which is binary for `2`.
