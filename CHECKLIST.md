@@ -12,7 +12,7 @@ Progress is tracked here.
         - [answers to questions](https://github.com/lekkas/c-algorithms)
 
 - [ ] **How computers process a program:**
-    - [x] [How CPU executes a program (video)](https://www.youtube.com/watch?v=XM4lGflQFvA) -- [Notes](notes/cpu-function.md)
+    - [x] [How CPU executes a program (video)](https://www.youtube.com/watch?v=XM4lGflQFvA) -- [Notes](notes/cpu-command-execution.md)
     - [x] [How computers calculate - ALU (video)](https://youtu.be/1I5ZMmrOfnA) -- [Notes](notes/alu-function.md)
     - [x] [Registers and RAM (video)](https://youtu.be/fpnE6UAfbtU) -- [Notes](notes/registers-and-ram.md)
     - [ ] [The Central Processing Unit (CPU) (video)](https://youtu.be/FZGugFqdr60)
